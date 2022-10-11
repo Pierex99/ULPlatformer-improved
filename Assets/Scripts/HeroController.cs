@@ -22,6 +22,7 @@ public class HeroController : MonoBehaviour
     private Vector3 mRaycastPointCalculated;
     private Animator mAnimator;
     private Transform mBulletSpawnPoint;
+    private bool doubleJump;
 
     void Start()
     {
@@ -79,9 +80,13 @@ public class HeroController : MonoBehaviour
         }
 
         //mIsJumpPressed = Input.GetKeyDown(KeyCode.Space);
-        if (!mIsJumping && Input.GetKeyDown(KeyCode.Space))
+        
+        if (!doubleJump && Input.GetKeyDown(KeyCode.Space))
         {
             mIsJumpPressed = true;
+        }
+        if(mIsJumping && Input.GetKeyDown(KeyCode.Space)){
+            doubleJump = true;
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -119,6 +124,7 @@ public class HeroController : MonoBehaviour
         {
             // Hay una colision, esta en el suelo
             mIsJumping = false;
+            doubleJump = false;
         }
     }
 
