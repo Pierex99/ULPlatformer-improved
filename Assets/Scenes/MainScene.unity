@@ -3990,6 +3990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790f8054b27c5224ab40df777160f53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mRb: {fileID: 0}
   life: 100
 --- !u!95 &1506865111
 Animator:
@@ -4047,7 +4048,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!212 &1506865114
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossController : MonoBehaviour
 {
     private Animator mAnimator;
-    private Rigidbody2D mRb;
+    public Rigidbody2D mRb;
     private Transform hero;
 
     private bool lookingRight = true;
