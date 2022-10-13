@@ -52,6 +52,10 @@ public class HeroController : MonoBehaviour
             "Canvas"
         ).Find(
             "HealthBar"
+        ).Find(
+            "Border"
+        ).GetComponent<Slider>();
+        
         mEnergySlider = transform.Find(
             "Canvas"
         ).Find(
