@@ -15,6 +15,8 @@ public class HeroController : MonoBehaviour
     private GameObject prefabBullet;
     [SerializeField]
     private float maxEnergy;
+    [SerializeField]
+    private TrailRenderer tr;
     
 
     private float mMovement = 0f;    
@@ -29,6 +31,9 @@ public class HeroController : MonoBehaviour
     private bool doubleJump;
     private float mEnergy = 0f;
     private Slider mEnergySlider;
+
+    private bool canTP = false;
+    private bool isTping = false;
 
 
 
@@ -110,6 +115,10 @@ public class HeroController : MonoBehaviour
         //actualizar vida
         mHealth = GetComponent<HeroBattle>().life;
         mSlider.value = mHealth;
+
+        if (Input.GetKeyDown(KeyCode.LeftControl) && canTP){
+            Teleport();
+        }
     }
 
     void Update()
@@ -143,6 +152,13 @@ public class HeroController : MonoBehaviour
 
         mAnimator.SetBool("isJumping", mIsJumping);
         mAnimator.SetBool("isFalling", mRb.velocity.y < 0f);
+
+        if (mEnergy >= 100){
+            canTP = true;
+        }
+        if(isTping){
+            return;
+        }
     }
 
     private void Jump()
@@ -190,11 +206,15 @@ public class HeroController : MonoBehaviour
     public void AddEnergy(){
         mEnergy += 25f;
         mEnergySlider.value = mEnergy;
-        if(mEnergy >= 100){
-            Debug.Log("Se activo el poder!");
-            mEnergy = 0f;
-            mEnergySlider.value = mEnergy;
-        }
+        
     }
 
+    private void Teleport(){
+        isTping=true;
+        canTP = false;
+        mRb.position += new Vector2(10f ,3f);
+        mEnergy = 0f;
+        mEnergySlider.value = mEnergy;
+        isTping=false;
+    }
 }
