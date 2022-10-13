@@ -16,7 +16,6 @@ public class HeroController : MonoBehaviour
     [SerializeField]
     private float maxEnergy;
     [SerializeField]
-    private TrailRenderer tr;
     
 
     private float mMovement = 0f;    
@@ -82,6 +81,9 @@ public class HeroController : MonoBehaviour
     void FixedUpdate()
     {
         
+        if(isTping){
+            return;
+        }
         //transform.position += mMovement * speed * Time.fixedDeltaTime * Vector3.right;
         mRb.velocity = new Vector2(
             mMovement * speed,
@@ -117,12 +119,15 @@ public class HeroController : MonoBehaviour
         mSlider.value = mHealth;
 
         if (Input.GetKeyDown(KeyCode.LeftControl) && canTP){
-            Teleport();
-        }
+            StartCoroutine(Teleport());
+        } 
     }
 
     void Update()
     {
+        if(isTping){
+            return;
+        }
         mMovement = Input.GetAxis("Horizontal");
 
         if (mMovement > 0f || mMovement < 0f )
@@ -156,9 +161,7 @@ public class HeroController : MonoBehaviour
         if (mEnergy >= 100){
             canTP = true;
         }
-        if(isTping){
-            return;
-        }
+        
     }
 
     private void Jump()
@@ -209,12 +212,15 @@ public class HeroController : MonoBehaviour
         
     }
 
-    private void Teleport(){
-        isTping=true;
+    private IEnumerator Teleport(){
         canTP = false;
-        mRb.position += new Vector2(10f ,3f);
+        isTping=true;
+        yield return new WaitForSeconds(0.1f);
+        mRb.position += GetPointDirection() == 1 ? new Vector2(10f ,3f) : new Vector2 (-10f,3f);
         mEnergy = 0f;
         mEnergySlider.value = mEnergy;
+        yield return new WaitForSeconds(0.1f);
         isTping=false;
+        
     }
 }
