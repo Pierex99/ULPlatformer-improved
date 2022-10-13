@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossController : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class BossController : MonoBehaviour
     [SerializeField] private float attackRadio;
     [SerializeField] private float attackDamage;
 
+    private float mBossHealth;
+    private Slider mBossSlider;
+
 
     private void Start()
     {
@@ -26,6 +30,17 @@ public class BossController : MonoBehaviour
         mRb = GetComponent<Rigidbody2D>();
         //lifebar.InitializeLifebar(life);
         hero = GameObject.FindGameObjectWithTag("Hero").GetComponent<Transform>();
+
+        mBossSlider = GameObject.Find(
+            "BossCanvas"
+        ).GetComponent<Transform>().Find(
+            "HealthBar"
+        ).Find(
+            "Border"
+        ).GetComponent<Slider>();        
+
+        mBossSlider.maxValue = life;
+        mBossHealth = life;
     }
 
     private void Update() {
@@ -44,10 +59,10 @@ public class BossController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        life -= damage;
+        mBossHealth -= damage;
         //lifebar.ChangeActualLife(life);
-
-        if (life <= 0)
+        mBossSlider.value = mBossHealth;
+        if (mBossHealth <= 0)
         {
             mAnimator.SetTrigger("Death");
         }

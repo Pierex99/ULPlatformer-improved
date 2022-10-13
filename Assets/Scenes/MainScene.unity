@@ -306,7 +306,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 42
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3984,7 +3984,7 @@ GameObject:
   - component: {fileID: 1167944199}
   - component: {fileID: 1167944198}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: BossCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4435,8 +4435,8 @@ MonoBehaviour:
   hero: {fileID: 0}
   life: 100
   attackController: {fileID: 1643447091}
-  attackRadio: 0
-  attackDamage: 0
+  attackRadio: 2
+  attackDamage: 20
 --- !u!95 &1506865111
 Animator:
   serializedVersion: 4
