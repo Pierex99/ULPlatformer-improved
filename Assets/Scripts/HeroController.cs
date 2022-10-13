@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroController : MonoBehaviour
 {
@@ -24,6 +25,11 @@ public class HeroController : MonoBehaviour
     private Transform mBulletSpawnPoint;
     private bool doubleJump;
 
+    private Slider mSlider;
+    private Transform mCanvas;
+    private float mHealth;
+    private float maxHealth;
+
     void Start()
     {
         mRb = GetComponent<Rigidbody2D>();
@@ -31,6 +37,21 @@ public class HeroController : MonoBehaviour
         mCollider = GetComponent<CapsuleCollider2D>();
         mAnimator = GetComponent<Animator>();
         mBulletSpawnPoint = transform.Find("BulletSpawnPoint");
+
+        maxHealth = GetComponent<HeroBattle>().life;
+
+        //barra de vida
+        mSlider = transform.Find(
+            "Canvas"
+        ).Find(
+            "HealthBar"
+        ).Find(
+            "Border"
+        ).GetComponent<Slider>();
+
+        mCanvas = transform.Find("Canvas");
+        mHealth = maxHealth;
+        mSlider.maxValue = maxHealth;
     }
 
     void FixedUpdate()
@@ -65,6 +86,10 @@ public class HeroController : MonoBehaviour
             Vector2.down * raycastDistance,
             mIsJumping == true ? Color.green : Color.white
         );
+
+        //actualizar vida
+        mHealth = GetComponent<HeroBattle>().life;
+        mSlider.value = mHealth;
     }
 
     void Update()

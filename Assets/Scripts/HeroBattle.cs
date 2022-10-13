@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeroBattle : MonoBehaviour
 {
-    [SerializeField] private float life;
+    [SerializeField] public float life;
 
     public void TakeDamage(float damage)
     {
