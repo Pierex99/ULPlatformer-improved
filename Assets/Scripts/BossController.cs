@@ -8,6 +8,7 @@ public class BossController : MonoBehaviour
     private Animator mAnimator;
     public Rigidbody2D mRb;
     public Transform hero;
+    private Transform mCanvasVictory;
 
     private bool lookingRight = false;
 
@@ -41,6 +42,7 @@ public class BossController : MonoBehaviour
 
         mBossSlider.maxValue = life;
         mBossHealth = life;
+        mCanvasVictory = GameObject.Find("BossCanvas").GetComponent<Transform>().Find("TextVictory");
     }
 
     private void Update() {
@@ -71,6 +73,7 @@ public class BossController : MonoBehaviour
     private void Death()
     {
         Destroy(gameObject);
+        mCanvasVictory.gameObject.SetActive(true);
     }
 
     public void LookHero()

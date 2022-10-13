@@ -5,6 +5,9 @@ using UnityEngine;
 public class HeroBattle : MonoBehaviour
 {
     [SerializeField] public float life;
+    
+    private Transform mCanvasLose;
+    
 
     public void TakeDamage(float damage)
     {
@@ -12,6 +15,8 @@ public class HeroBattle : MonoBehaviour
         if (life <= 0)
         {
             Destroy(gameObject);
+            mCanvasLose = GameObject.Find("BossCanvas").GetComponent<Transform>().Find("TextGameOver");
+            mCanvasLose.gameObject.SetActive(true);
         }
     }
 }
