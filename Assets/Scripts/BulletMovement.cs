@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,12 +14,14 @@ public class BulletMovement : MonoBehaviour
     
     private Rigidbody2D mRb; 
     private float timer = 0f;
+    private HeroController hero;
+
 
     void Start()
     {
         mRb = GetComponent<Rigidbody2D>();
 
-        HeroController hero = GameManager.Instance.hero;
+        hero = GameManager.Instance.hero;
             
         mRb.velocity = new Vector2(
             hero.GetPointDirection() == 1 ? speed : -speed, 
@@ -39,5 +42,6 @@ public class BulletMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(gameObject);
+        hero.AddEnergy();
     }
 }

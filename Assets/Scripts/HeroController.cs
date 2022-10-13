@@ -13,6 +13,9 @@ public class HeroController : MonoBehaviour
     private float raycastDistance;
     [SerializeField]
     private GameObject prefabBullet;
+    [SerializeField]
+    private float maxEnergy;
+    
 
     private float mMovement = 0f;    
     private bool mIsJumpPressed = false;
@@ -24,6 +27,10 @@ public class HeroController : MonoBehaviour
     private Animator mAnimator;
     private Transform mBulletSpawnPoint;
     private bool doubleJump;
+    private float mEnergy = 0f;
+    private Slider mEnergySlider;
+
+
 
     private Slider mSlider;
     private Transform mCanvas;
@@ -45,6 +52,10 @@ public class HeroController : MonoBehaviour
             "Canvas"
         ).Find(
             "HealthBar"
+        mEnergySlider = transform.Find(
+            "Canvas"
+        ).Find(
+            "EnergyBar"
         ).Find(
             "Border"
         ).GetComponent<Slider>();
@@ -52,7 +63,12 @@ public class HeroController : MonoBehaviour
         mCanvas = transform.Find("Canvas");
         mHealth = maxHealth;
         mSlider.maxValue = maxHealth;
+        mEnergySlider.maxValue = 100f;
+
+
+
     }
+    
 
     void FixedUpdate()
     {
@@ -166,4 +182,15 @@ public class HeroController : MonoBehaviour
     {
         return (int)transform.localScale.x;
     }
+
+    public void AddEnergy(){
+        mEnergy += 25f;
+        mEnergySlider.value = mEnergy;
+        if(mEnergy >= 100){
+            Debug.Log("Se activo el poder!");
+            mEnergy = 0f;
+            mEnergySlider.value = mEnergy;
+        }
+    }
+
 }

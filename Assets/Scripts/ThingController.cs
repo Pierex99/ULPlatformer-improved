@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class ThingController : MonoBehaviour
     private float mHealth;
 
     private bool isAttacking = false;
+
 
     private void Start()
     {
@@ -60,6 +62,7 @@ public class ThingController : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             Hurt();
+            
         }
         
     }
@@ -92,6 +95,7 @@ public class ThingController : MonoBehaviour
             mCanvas.gameObject.SetActive(false);
             mRb.velocity = Vector2.zero;
             mAnimator.SetTrigger("Die");
+            
         }
     }
 }
